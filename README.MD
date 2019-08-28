@@ -33,6 +33,8 @@ Begin by downloading the latest release of this code.  Extract the contents of t
 3. Choose the name of the item set.  If no item set with the provided name exists, one will be created.  If an item set with the given name does exist, items will be added to that item set.  **Important:** Adding items to an existing item set in which items were previously added using any other means or with this script but different settings (such as a different metadata profile) will produce undefined results.  If adding to an existing item set, make sure to use this script and the same settings each time!
 4. Choose whether deduplication is performed per item or per family.
 
+If items are selected in the result view when the script is ran, those selected items will be added to the designated item set.  If no items are selected when the script is ran *all items in the case will be added*.
+
 # Cloning this Repository
 
 This script relies on code from [Nx](https://github.com/Nuix/Nx) to present a settings dialog and progress dialog.  This JAR file is not included in the repository (although it is included in release downloads).  If you clone this repository, you will also want to obtain a copy of Nx.jar by either:

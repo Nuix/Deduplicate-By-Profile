@@ -28,10 +28,10 @@ Begin by downloading the latest release of this code.  Extract the contents of t
 
 ![image](https://user-images.githubusercontent.com/11775738/63889058-13bd6480-c995-11e9-9b7d-bf20b532bcf7.png)
 
-1.) Choose the metadata profile to use.  The fields present in the selected metadata profile dictate which values are used to generate the custom MD5 digest.
-2.) Choose whether the item's content text should be included when generating the custom MD5 digest.
-3.) Choose the name of the item set.  If no item set with the provided name exists, one will be created.  If an item set with the given name does exist, items will be added to that item set.  **Important:** Adding items to an existing item set in which items were previously added using any other means or with this script but different settings (such as a different metadata profile) will produce undefined results.  If adding to an existing item set, make sure to use this script and the same settings each time!
-4.) Choose whether deduplication is performed per item or per family.
+1. Choose the metadata profile to use.  The fields present in the selected metadata profile dictate which values are used to generate the custom MD5 digest.
+2. Choose whether the item's content text should be included when generating the custom MD5 digest.
+3. Choose the name of the item set.  If no item set with the provided name exists, one will be created.  If an item set with the given name does exist, items will be added to that item set.  **Important:** Adding items to an existing item set in which items were previously added using any other means or with this script but different settings (such as a different metadata profile) will produce undefined results.  If adding to an existing item set, make sure to use this script and the same settings each time!
+4. Choose whether deduplication is performed per item or per family.
 
 # Cloning this Repository
 

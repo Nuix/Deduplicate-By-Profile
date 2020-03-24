@@ -46,7 +46,9 @@ main_tab.appendComboBox("deduplicate_by","Deduplicate By",["FAMILY","INDIVIDUAL"
 
 # Validate user input
 dialog.validateBeforeClosing do |values|
-	if values["item_set_name"].strip.empty?
+	item_set_name = values["item_set_name"]
+
+	if item_set_name.strip.empty?
 		CommonDialogs.showWarning("Please provide a non-empty item set name.")
 		next false
 	end
@@ -73,6 +75,7 @@ if dialog.getDialogResult == true
 		pd.onMessageLogged do |message|
 			puts message
 		end
+		pd.setSubStatus("")
 
 		profile_digester = ProfileDigester.new
 		profile_digester.setProfile(metadata_profile)
@@ -85,8 +88,8 @@ if dialog.getDialogResult == true
 		last_progress_message = Time.now
 		profile_digester.whenProgressUpdated do |current,total|
 			pd.setMainProgress(current,total)
+			pd.setMainStatus("Progress #{current}/#{total}")
 			if (Time.now - last_progress_message) > 1 || current == total
-				puts "Progress #{current}/#{total}"
 				last_progress_message = Time.now
 			end
 		end

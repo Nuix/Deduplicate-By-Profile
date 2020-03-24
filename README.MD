@@ -13,7 +13,7 @@ When creating an item set in Nuix using the API, the API provides a way to provi
 
 This script leverages the [ProfileDigester](https://nuix.github.io/SuperUtilities/com/nuix/superutilities/misc/ProfileDigester.html) class of [SuperUtilities](https://github.com/Nuix/SuperUtilities) to generate a custom MD5 digest by using the concatenated values yielded by a provided metadata profile for each item.
 
-**Technical Note:** A concatentation of values is not actually used, instead for a given item each metadata profile field is evaluated against that item and each resulting string value is converted to a byte array and successively used to update the digest.  See code for [ProfileDigester.generateMd5Bytes](https://github.com/Nuix/SuperUtilities/blob/master/Java/src/main/java/com/nuix/superutilities/misc/ProfileDigester.java#L196) for more detail.
+**Technical Note:** A concatentation of values is not actually used, instead for a given item each metadata profile field is evaluated against that item and each resulting string value is converted to a byte array and successively used to update the digest.  See code for [ProfileDigester.generateMd5Bytes](https://github.com/Nuix/SuperUtilities/blob/master/Java/src/main/java/com/nuix/superutilities/misc/ProfileDigester.java#L196) for more detail.  Effectively this should be the same result as digesting the concatenation of the fields, but with potentially lower resource overhead.
 
 # Getting Started
 
@@ -52,7 +52,7 @@ Once you also have a copy of SuperUtilities.jar, make sure to include it in the 
 # License
 
 ```
-Copyright 2019 Nuix
+Copyright 2020 Nuix
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

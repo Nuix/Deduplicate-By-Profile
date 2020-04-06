@@ -43,6 +43,8 @@ main_tab.appendComboBox("metadata_profile_name","Metadata Profile",profile_names
 main_tab.appendCheckBox("include_content_text","Include Item Content Text",false)
 main_tab.appendTextField("item_set_name","Item Set Name","Deduplicated By Profile")
 main_tab.appendComboBox("deduplicate_by","Deduplicate By",["FAMILY","INDIVIDUAL"])
+main_tab.appendCheckBox("record_custom_digest","Record Custom Digest",true)
+main_tab.appendTextField("custom_digest_field","Digest Custom Metadata Field","DedupeByProfileDigest")
 
 # Validate user input
 dialog.validateBeforeClosing do |values|
@@ -50,6 +52,11 @@ dialog.validateBeforeClosing do |values|
 
 	if item_set_name.strip.empty?
 		CommonDialogs.showWarning("Please provide a non-empty item set name.")
+		next false
+	end
+
+	if values["record_custom_digest"] && values["custom_digest_field"].strip.empty?
+		CommonDialogs.showWarning("Please provide a value for 'Digest Custom Metadata Field'")
 		next false
 	end
 
@@ -65,6 +72,8 @@ if dialog.getDialogResult == true
 	include_content_text = values["include_content_text"]
 	item_set_name = values["item_set_name"]
 	deduplicate_by = values["deduplicate_by"]
+	record_custom_digest = values["record_custom_digest"]
+	custom_digest_field = values["custom_digest_field"]
 
 	error_count = 0
 	semaphore = Mutex.new
@@ -80,6 +89,8 @@ if dialog.getDialogResult == true
 		profile_digester = ProfileDigester.new
 		profile_digester.setProfile(metadata_profile)
 		profile_digester.setIncludeItemText(include_content_text)
+		profile_digester.setRecordDigest(record_custom_digest)
+		profile_digester.setDigestCustomField(custom_digest_field)
 
 		profile_digester.whenMessageLogged do |message|
 			pd.logMessage(message)
@@ -108,6 +119,11 @@ if dialog.getDialogResult == true
 		else
 			items = $current_case.searchUnsorted("")
 			pd.logMessage("Using all #{items.size} items in case")
+		end
+
+		pd.logMessage("Record Custom Digest: #{record_custom_digest}")
+		if record_custom_digest
+			pd.logMessage("Custom Digest Field: #{custom_digest_field}")
 		end
 
 		pd.logMessage("Adding items to item set...")

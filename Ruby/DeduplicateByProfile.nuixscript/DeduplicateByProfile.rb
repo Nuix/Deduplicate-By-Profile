@@ -63,10 +63,15 @@ dialog.validateBeforeClosing do |values|
 	next true
 end
 
+# Display settings dialog
 dialog.display
+
+# Did they click okay and validations all passed?  If so then we
+# shall get to work
 if dialog.getDialogResult == true
 	values = dialog.toMap
 
+	# Get settings from dialog
 	metadata_profile_name = values["metadata_profile_name"]
 	metadata_profile = $utilities.getMetadataProfileStore.getMetadataProfiles.select{|p|p.getName == metadata_profile_name}.first
 	include_content_text = values["include_content_text"]
@@ -78,6 +83,7 @@ if dialog.getDialogResult == true
 	error_count = 0
 	semaphore = Mutex.new
 
+	# Display progress dialog
 	ProgressDialog.forBlock do |pd|
 		pd.setAbortButtonVisible(false)
 		pd.setTitle("Deduplicate By Profile")
@@ -86,6 +92,7 @@ if dialog.getDialogResult == true
 		end
 		pd.setSubStatus("")
 
+		# Configure our profile digester (from SuperUtilities)
 		profile_digester = ProfileDigester.new
 		profile_digester.setProfile(metadata_profile)
 		profile_digester.setIncludeItemText(include_content_text)

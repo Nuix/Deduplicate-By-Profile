@@ -1,7 +1,7 @@
 Deduplicate by Profile
 ======================
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) ![This script was last tested in Nuix 8.4](https://img.shields.io/badge/Script%20Tested%20in%20Nuix-8.4-green.svg)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) ![This script was last tested in Nuix 9.0](https://img.shields.io/badge/Script%20Tested%20in%20Nuix-9.0-green.svg)
 
 View the GitHub project [here](https://github.com/Nuix/Deduplicate-By-Profile) or download the latest release [here](https://github.com/Nuix/Deduplicate-By-Profile/releases).
 
@@ -26,12 +26,14 @@ Begin by downloading the latest release of this code.  Extract the contents of t
 
 # Usage
 
-![image](https://user-images.githubusercontent.com/11775738/63889058-13bd6480-c995-11e9-9b7d-bf20b532bcf7.png)
+![image](https://user-images.githubusercontent.com/11775738/106504031-410c1d00-647b-11eb-8377-cb0d26b3e370.png)
 
 1. Choose the metadata profile to use.  The fields present in the selected metadata profile dictate which values are used to generate the custom MD5 digest.
 2. Choose whether the item's content text should be included when generating the custom MD5 digest.
 3. Choose the name of the item set.  If no item set with the provided name exists, one will be created.  If an item set with the given name does exist, items will be added to that item set.  **Important:** Adding items to an existing item set in which items were previously added using any other means or with this script but different settings (such as a different metadata profile) will produce undefined results.  If adding to an existing item set, make sure to use this script and the same settings each time!
 4. Choose whether deduplication is performed per item or per family.
+5. Choose whether the custom MD5 digest is recorded onto the item as custom metadata.
+6. Choose the name of the custom metadata field to record the custom MD5 digest into.
 
 If items are selected in the result view when the script is ran, those selected items will be added to the designated item set.  If no items are selected when the script is ran *all items in the case will be added*.
 
@@ -52,7 +54,7 @@ Once you also have a copy of SuperUtilities.jar, make sure to include it in the 
 # License
 
 ```
-Copyright 2020 Nuix
+Copyright 2021 Nuix
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

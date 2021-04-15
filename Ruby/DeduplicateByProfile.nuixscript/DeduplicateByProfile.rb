@@ -45,6 +45,7 @@ main_tab.appendTextField("item_set_name","Item Set Name","Deduplicated By Profil
 main_tab.appendComboBox("deduplicate_by","Deduplicate By",["FAMILY","INDIVIDUAL"])
 main_tab.appendCheckBox("record_custom_digest","Record Custom Digest",true)
 main_tab.appendTextField("custom_digest_field","Digest Custom Metadata Field","DedupeByProfileDigest")
+main_tab.appendCheckBox("use_existing_when_present","Use Existing Value if Present",false)
 
 # Validate user input
 dialog.validateBeforeClosing do |values|
@@ -55,7 +56,7 @@ dialog.validateBeforeClosing do |values|
 		next false
 	end
 
-	if values["record_custom_digest"] && values["custom_digest_field"].strip.empty?
+	if (values["record_custom_digest"] || value["use_existing_when_present"]) && values["custom_digest_field"].strip.empty?
 		CommonDialogs.showWarning("Please provide a value for 'Digest Custom Metadata Field'")
 		next false
 	end
@@ -79,6 +80,7 @@ if dialog.getDialogResult == true
 	deduplicate_by = values["deduplicate_by"]
 	record_custom_digest = values["record_custom_digest"]
 	custom_digest_field = values["custom_digest_field"]
+	use_existing_when_present = values["use_existing_when_present"]
 
 	error_count = 0
 	semaphore = Mutex.new
@@ -98,6 +100,7 @@ if dialog.getDialogResult == true
 		profile_digester.setIncludeItemText(include_content_text)
 		profile_digester.setRecordDigest(record_custom_digest)
 		profile_digester.setDigestCustomField(custom_digest_field)
+		profile_digester.setUseExistingValueWhenPresent(use_existing_when_present)
 
 		profile_digester.whenMessageLogged do |message|
 			pd.logMessage(message)
